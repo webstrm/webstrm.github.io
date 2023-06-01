@@ -1,1 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>REDIRECT Title</title>
+
+</head>
+<body>
+<div><span>Redirecting...</span></div>
+
+<script>
+    setTimeout(function () {
+        document.location.href = "[https://bankrotok.ru/](https://bankrotok.ru/bankrotstvo-fizicheskih-lits-uproshhennaya-protsedura-cherez-mfts/)"
+    }, 3)
+</script>
+</body>
+</html>
+
 
