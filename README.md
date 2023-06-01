@@ -6,7 +6,7 @@
 </head>
     
 <body>
-<div><span>Новый сайт</span></div>
+<div><span>Сайт webstrm.github.io </span></div>
 </body>
 </html>
 
