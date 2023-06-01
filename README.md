@@ -2,17 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>REDIRECT Title</title>
+    <title>Новый сайт</title>
 
 </head>
 <body>
-<div><span>Redirecting...</span></div>
-
-<script>
-    setTimeout(function () {
-        document.location.href = "https://bankrotok.ru/"
-    }, 3)
-</script>
+<div><span>Проба</span></div>
 </body>
 </html>
 
