@@ -1,0 +1,528 @@
+<div>
+<br>
+Простой калькулятор фитофтороза для расчета необходимости опрыскивания на основе прогноза погоды<br>
+<br></div>
+
+<style type="text/css">
+            .calc-bg{
+                background: #fcfff4; /* Old browsers */
+                background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(40%,#dfe5d7), color-stop(100%,#b3bead)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* IE10+ */
+                background: linear-gradient(to bottom, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
+            }
+            td[t="i"]{
+                box-shadow: 0 0 5px rgba(0,0,0,0.3) inset;
+            }
+            #calc-fitoftora img{
+                cursor:pointer;
+            }
+        </style>
+        <script>
+            var IE='\v'=='v';
+            var Lang = [
+                'Прогноз развития фитофтороза при заданных погодных условиях',
+                'Используйте прогноз на завтра и четыре последующих дня',
+                'Температура',
+                'Осадки',
+                'Максимальная температура в этот день',
+                'Минимальная температура в этот день',
+                'Прогнозируется выпадение осадков',
+                'Осадков не предвидится',
+                'Завтра',
+                'Послезавтра',
+                'День третий',
+                'День четвёртый',
+                'День пятый',
+                'Авторы : Филиппов, Рогожин ВНИИ Фитопатологии.',
+                'Программное оформление : Сорокин ВНИИ Фитопатологии. 2015г.',
+                'Температура слишком низкая!Проверьте Ваши данные!',
+                'Температура слишком высокая!Проверьте Ваши данные!',
+                'Минимальная температура не может быть больше максимальной.Проверьте Ваши данные!',
+                'Прогнозируется благоприятная для развития фитофтороза погода',
+                'Не защищенные от фитофтороза поля - обработать фунгицидом',
+                'Прогнозируется неблагоприятная для развития фитофтороза погода',
+                'Пока не обрабатывать от фитофтороза'
+            ];
+        </script>
+<center>
+<div id="div_bg" class="calc-bg" style="display:inline-block; border-radius:8px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+            <table id="calc-fitoftora" style="border: 1px solid gray; border-radius:8px; padding:5px;" width="1" cellspacing="5" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td colspan="4">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td width="1%" valign="center" align="center">
+                                        <img style="border:1px solid black; margin: 10px; width: 50px;" src="/img/users/fitoftora-calc/logo.jpg">
+                                    </td>
+                                    <td valign="center" align="left">
+                                        <h3 style="margin: 0; padding: 0; color:#333333;"><script> document.write(Lang[0]);</script>
+</h3>
+                                    <br>
+</td>
+                                </tr>
+                            </tbody>
+</table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="padding:5px;">
+                            <small style="margin: 0; padding: 0; color:#0f0f0f;"><script> document.write(Lang[1]);</script>
+</small>
+                        <br>
+</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">
+                            <div style="width:150px;">&nbsp;</div>
+                        </td>
+                        <td colspan="2" align="center"><script> document.write(Lang[2]);</script>
+<br>
+</td>
+                        <td rowspan="2" valign="center" align="center"><script> document.write(Lang[3]);</script>
+<br>
+</td>
+                    </tr>
+                    <tr>
+                        <td align="center">min<script> if (!IE) document.write('&#8451;');</script>
+</td>
+                        <td align="center">max<script> if (!IE) document.write('&#8451;');</script>
+</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="width:200px; font-weight: bold; color:#333333;"><script> document.write(Lang[8]);</script>
+</div>
+                        <br>
+</td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="min1" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="min℃" value="10" type="text">
+                        </td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="max1" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="max℃" value="15" type="text">
+                        </td>
+                        <td>
+                            <table cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d1" id="ds1" checked="" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="ds1"><img type="sunny" src="/img/users/fitoftora-calc/sunny.png"></label>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td style="margin:3px; border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d1" id="dr1" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="dr1"><img type="rain" src="/img/users/fitoftora-calc/rain.png"></label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="width:150px; font-weight: bold; color:#333333;"><script> document.write(Lang[9]);</script>
+</div>
+                        <br>
+</td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="min2" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="min℃" value="9" type="text">
+                        </td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="max2" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="max℃" value="14" type="text">
+                        </td>
+                        <td>
+                            <table cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d2" id="ds2" checked="" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="ds2"><img type="sunny" src="/img/users/fitoftora-calc/sunny.png"></label>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td style="margin:3px; border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d2" id="dr2" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="dr2"><img type="rain" src="/img/users/fitoftora-calc/rain.png"></label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="width:150px; font-weight: bold; color:#333333;"><script> document.write(Lang[10]);</script>
+</div>
+                        <br>
+</td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="min3" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="min℃" value="8" type="text">
+                        </td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="max3" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="max℃" value="13" type="text">
+                        </td>
+                        <td>
+                            <table cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d3" id="ds3" checked="" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="ds3"><img type="sunny" src="/img/users/fitoftora-calc/sunny.png"></label>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td style="margin:3px; border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d3" id="dr3" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="dr3"><img type="rain" src="/img/users/fitoftora-calc/rain.png"></label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="width:150px; font-weight: bold; color:#333333;"><script> document.write(Lang[11]);</script>
+</div>
+                        <br>
+</td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="min4" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="min℃" value="10" type="text">
+                        </td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="max4" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="max℃" value="16" type="text">
+                        </td>
+                        <td>
+                            <table cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d4" id="ds4" checked="" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="ds4"><img type="sunny" src="/img/users/fitoftora-calc/sunny.png"></label>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td style="margin:3px; border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d4" id="dr4" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="dr4"><img type="rain" src="/img/users/fitoftora-calc/rain.png"></label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="width:150px; font-weight: bold; color:#333333;"><script> document.write(Lang[12]);</script>
+</div>
+                        <br>
+</td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="min5" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="min℃" value="12" type="text">
+                        </td>
+                        <td t="i" style="margin:3px;border: 1px solid gray; border-radius: 8px;" valign="center" align="center">
+                            <input id="max5" style="height:1.7em; padding: 0; margin: 0; border: 0; width: 80px; text-align: center;; background:transparent;" placeholder="max℃" value="18" type="text">
+                        </td>
+                        <td>
+                            <table cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d5" id="ds5" checked="" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="ds5"><img type="sunny" src="/img/users/fitoftora-calc/sunny.png"></label>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td style="margin:3px; border: 1px solid gray; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-right: none;">
+                                            <input name="d5" id="dr5" type="radio">
+                                        </td>
+                                        <td style="margin:3px;border: 1px solid gray; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-left: none;">
+                                            <label for="dr5"><img type="rain" src="/img/users/fitoftora-calc/rain.png"></label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td id="calc-result" t="i" colspan="4" style="margin:3px;border: 1px solid gray; border-radius: 8px; padding:8px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="margin:3px;padding:2px 2px 2px 0;">
+                            <b style="font-size: 0.7em; color:gray;"><script> document.write(Lang[13]);</script>
+<br>
+                            <script> document.write(Lang[14]);</script>
+</b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script type="text/javascript">
+            if (IE) {
+                document.getElementById('div_bg').style.display = 'block';
+                document.getElementById('div_bg').style.width = document.getElementById('calc-fitoftora').offsetWidth + 'px';
+            }
+            // корректировка вводимых значений
+            var controlNumberValue = function(node)
+            {
+                var value = (node.value||'');
+                if (value == '') {
+                    return;
+                }
+                if (/^[1-9]\d?(\.(\d{0,2})?)?$/.test(value)) {
+                    return;
+                }
+                value = value.replace(/\,/g, '.').replace(/[^\d\.]/g, '');
+                var tmp = (parseFloat(value)||'0');
+                node.value = (value ? tmp : '') + (/\.$/.test(value) ? '.' : '');
+            };
+            // calc result
+            var calculete = function()
+            {
+                var vmax = [], vmin = [], vos = [], node = document.getElementById('calc-result');
+                for(var i=1; i<6; i++){
+                    vmin[i] = (parseFloat(document.getElementById('min' + i).value)||0);
+                    vmax[i] = (parseFloat(document.getElementById('max' + i).value)||0);
+                    vos[i]  = (document.getElementById('dr' + i).checked ? 1 : 0);
+                    //alert('vmin :' + vmin[i] + ' | vmax : ' + vmax[i] + ' | osadki : ' + vos[i]);
+                    document.getElementById('min' + i).parentNode.style.background = "";
+                    document.getElementById('max' + i).parentNode.style.background = "";
+                    if (vmin[i] < 1) {
+                        var error = Lang[15];
+                        document.getElementById('min' + i).parentNode.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.innerHTML = error;
+                        node.title = error;
+                        return;
+                    }
+                    if (vmin[i] > 40) {
+                        var error = Lang[16];
+                        document.getElementById('min' + i).parentNode.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.innerHTML = error;
+                        node.title = error;
+                        return;
+                    }
+                    if (vmax[i] < 1) {
+                        var error = Lang[15];
+                        document.getElementById('max' + i).parentNode.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.innerHTML = error;
+                        node.title = error;
+                        return;
+                    }
+                    if (vmax[i] > 40) {
+                        var error = Lang[16];
+                        document.getElementById('max' + i).parentNode.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.innerHTML = error;
+                        node.title = error;
+                        return;
+                    }
+                    if (vmin[i] > vmax[i]) {
+                        var error = Lang[17];
+                        document.getElementById('min' + i).parentNode.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        document.getElementById('max' + i).parentNode.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                        node.innerHTML = error;
+                        node.title = error;
+                        return;
+                    }
+                }
+
+                var q = -32.47 + 0.75 * vmax[1] + 0.41 * vmax[2] + 0.41 * vmax[3] + 0.27 * vmax[4] + 0.74 * vmax[5];
+                    q = q +      0.30 * vmin[1] - 0.07 * vmin[2] - 0.16 * vmin[3] + 0.06 * vmin[4] + 0.01 * vmin[5];
+                    q = q +      2.88 *  vos[1]  + 1.98 * vos[2]  + 1.98 * vos[3]  + 1.79 * vos[4]  + 0.53 * vos[5];
+
+                var q1 = -31.34 + 0.63 * vmax[1] + 0.37 * vmax[2] + 0.49 * vmax[3] + 0.220 * vmax[4] + 0.65 * vmax[5];
+                    q1 = q1 +      0.24 * vmin[1] - 0.06 * vmin[2] - 0.15 * vmin[3] - 0.135 * vmin[4] + 0.15 * vmin[5];
+                    q1 = q1 +      4.88 *  vos[1]  + 3.55 * vos[2] +  3.34 * vos[3]  + 2.500 * vos[4]  + 2.29 * vos[5];
+
+                if ((q1 - q) > 0) {
+                    node.style.background = (IE ? "rgb(255,179,174)" : "rgba(255,179,174,0.5)");
+                    node.innerHTML = Lang[18];
+                    node.title = Lang[19];
+                }
+                else {
+                    node.style.background = (IE ? "rgb(144,238,174)" : "rgba(144,238,174,0.5)");
+                    node.innerHTML = Lang[20];
+                    node.title = Lang[21];
+                }
+            };
+
+            // init
+            var inputs = document.getElementById("calc-fitoftora").getElementsByTagName('input');
+
+            for(var i=0; i<inputs.length; i++){
+
+                inputs[i].nextFocus = function(){
+                    var id = parseInt(this.id.replace(/[^\d]/g, ''));
+                    if (/^min/.test(this.id)){
+                        document.getElementById('max' + id).focus();
+                        document.getElementById('max' + id).selectionStart = 0;
+                        document.getElementById('max' + id).selectionEnd = String((document.getElementById('max' + id).value||'')).length;
+                        return;
+                    }
+                    else if (/^max/.test(this.id)){
+                        if (document.getElementById('ds' + id).checked) {
+                            document.getElementById('ds' + id).focus();
+                            return;
+                        }
+                        document.getElementById('dr' + id).focus();
+                        return;
+                    }
+                    id = (id > 4 ? 1 : id + 1);
+                    document.getElementById('min' + id).focus();
+                    document.getElementById('min' + id).selectionStart = 0;
+                    document.getElementById('min' + id).selectionEnd = (document.getElementById('min' + id).value||'').length;
+                };
+
+                inputs[i].onkeydown = function(e){
+                    e = (e||window.event);
+                    if (e.keyCode == 13) {
+                        calculete();
+                        this.nextFocus();
+                        return false;
+                    }
+                    return true;
+                };
+
+                if (inputs[i].getAttribute('type') == 'text') {
+                    inputs[i].onblur = function(e){
+                        e = (e||window.event);
+                        var target = (e.target||e.srcElement);
+                        controlNumberValue(target);
+                        calculete();
+                    };
+                    inputs[i].onfocus = function(){
+                        if (IE) {
+                            this.select();
+                            return;
+                        }
+                        this.selectionStart = 0;
+                        this.selectionEnd = (this.value||'').length;
+                    };
+                    inputs[i].oninput = function(e){
+                        e = (e||window.event);
+                        var target = (e.target||e.srcElement);
+                        controlNumberValue(target);
+                        calculete();
+                    };
+                    inputs[i].onkeypress = function(e){
+                        e = (e||window.event);
+                        var target = (e.target||e.srcElement);
+                        setTimeout(function(o){
+                            controlNumberValue(target);
+                            calculete();
+                        }, 10);
+                    };
+                }
+                else {
+                    inputs[i].onchange = function(){
+                        setTimeout(function(){calculete();}, 0);
+                    };
+                    if (IE) {
+                        inputs[i].onchange = function(){
+                            setTimeout(function(){calculete();}, 0);
+                        };
+                        inputs[i].onclick = function(){
+                            setTimeout(function(){calculete();}, 0);
+                        };
+                        if (/^ds/.test(inputs[i].id)) {
+                            document.getElementById(inputs[i].id.replace('s', 'r')).onclick = function(){
+                                setTimeout(function(){calculete();}, 0);
+                            };
+                        }
+                        else {
+                            document.getElementById(inputs[i].id.replace('r', 's')).onclick = function(){
+                                setTimeout(function(){calculete();}, 0);
+                            };
+                        }
+                    }
+                    else {
+                        inputs[i].onchange = function(){
+                            setTimeout(function(){calculete();}, 0);
+                        };
+                    }
+                }
+                // add titles
+                if (/^max/.test(inputs[i].id)) {
+                    inputs[i].title = Lang[4];
+                }
+                else if (/^min/.test(inputs[i].id)) {
+                    inputs[i].title = Lang[5];
+                }
+                else if (/^ds/.test(inputs[i].id)) {
+                    inputs[i].title = Lang[7];
+                }
+                else {
+                    inputs[i].title = Lang[6];
+                }
+            }
+            var imgs = document.getElementById("calc-fitoftora").getElementsByTagName('img');
+            for(var i=0; i<imgs.length; i++){
+                if (imgs[i].getAttribute('type') == 'rain') {
+                  //  imgs[i].src = 'rain.png';
+                    imgs[i].title = Lang[6];
+                    if (!IE) {
+                        continue;
+                    }
+                    imgs[i].onclick = function(){
+                        var inps = this.parentNode.parentNode.parentNode.getElementsByTagName('input');
+                        inps[1].checked = true;
+                        inps[0].checked = false;
+                        setTimeout(function(){calculete();}, 0);
+                    };
+                }
+                else if (imgs[i].getAttribute('type') == 'sunny'){
+                  //  imgs[i].src = 'sunny.png';
+                    imgs[i].title = Lang[7];
+                    if (!IE) {
+                        continue;
+                    }
+                    imgs[i].onclick = function(){
+                        var inps = this.parentNode.parentNode.parentNode.getElementsByTagName('input');
+                        inps[1].checked = false;
+                        inps[0].checked = true;
+                        setTimeout(function(){calculete();}, 0);
+                    };
+                }
+            }
+            calculete();
+        </script>
+</center>
+<div>
+<br>
+<br><br>
+</div>
+
+<div align="center"><br>
+</div><div align="center"><font size="5"><a href="/vniif/structure/otdel9/page/1540" target="_blank" style="">Калькулятор фитофтороза - Late blight calculator (ENG)</a>
+</font>
+<br>
+</div>
+<div align="center"><font size="5"><br>
+</font></div>
